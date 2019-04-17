@@ -5,6 +5,8 @@ This is code used on the website for [Wycliffe Drama Group](https://www.wycliffe
 My work flow uses [Visual Studio Code](https://code.visualstudio.com/) and [Clasp](https://codelabs.developers.google.com/codelabs/clasp/#0) to edit and synchronise between the local and remote site.
 
 ### Clasp
+Documentation for installing clasp can be found [here](https://developers.google.com/apps-script/guides/clasp).
+
 Use `clasp push` to update the GAS site after local changes.
 
 Use `clasp pull` to synchronise any changes made on the GAS site to bring them down locally.  It is not recommended to work this way.  Changes should only be made locally and then pushed to GAS.
