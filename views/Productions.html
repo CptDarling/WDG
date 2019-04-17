@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <?!= include('css/Stylesheet'); ?>
+  </head>
+  <body>
+    <div class="container">
+    <div class="panel-group" id="accordion">
+
+      <?
+        var data = getProductionData();
+        var colID = getColumnIndex('ID');
+        var colTitle = getColumnIndex('Title');
+        var colYear = getColumnIndex('Year');
+        var colWriter = getColumnIndex('Writer');
+        var colDirector = getColumnIndex('Director');
+        var colProducer = getColumnIndex('Producer');
+        var colDate = getColumnIndex('Date');
+        var colCast = getColumnIndex('Cast');
+        var rowTemplate = '<tr padding="15px"><td align="right"><strong>%s</strong></td><td>%s</td></tr>';
+        var castTemplate = '<tr padding="15px"><td align="right"><strong>%s:</strong></td><td>%s</td></tr>';
+      ?>
+      <? for (var i = 0; i < data.length; i++) { ?>
+      <? var idx = i + 1; ?>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?= idx ?>"><?= data[i][colTitle] ?> (<?= data[i][colYear] ?>)</a>
+          </h4>
+        </div>
+        <div id="collapse<?= idx ?>" class="panel-collapse collapse">
+          <div class="panel-body">
+              <?!= formatParagraph(getDescription(data[i][colID]), '<hr/>') ?>
+              <table>
+                <?!= getTR(rowTemplate, 'Writer: ', data[i][colWriter]) ?>
+                <?!= getTR(rowTemplate, 'Director: ', data[i][colDirector]) ?>
+                <?!= getTR(rowTemplate, 'Producer: ', data[i][colProducer]) ?>
+                <?!= getTR(rowTemplate, 'Production Date: ', formatDate(data[i][colDate])) ?>
+                <?!= getTRCast(castTemplate, data[i][colTitle], data[i][colYear]) ?>
+              </table>
+              
+          </div>
+        </div>
+      </div>
+      <? } ?>
+    
+    </div> 
+  </div>
+  </body>
+</html>

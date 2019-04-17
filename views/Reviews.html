@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <?!= include('css/Stylesheet'); ?>
+  </head>
+  <body>
+    <div class="container">
+    <div class="panel-group" id="accordion">
+    <h2>Reviews</h2>
+    <p>Click on the show title to display the review.<br/>
+    <small>The reviews are listed in show date order, most recent at the top.</small></p>
+    
+      <? var data = getReviewData(); 
+         var colYear = 1; 
+         var colTitle = 3;
+         var colReview = 4; 
+       ?>
+       <? for (var i = 0; i < data.length; i++) { ?>
+         <? var idx = i + 1; ?>
+         <div class="panel panel-default">
+           <div class="panel-heading">
+             <h4 class="panel-title">
+               <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?= idx ?>"><?= data[i][colTitle] ?> (<?= data[i][colYear] ?>)</a>
+             </h4>
+           </div>
+           <div id="collapse<?= idx ?>" class="panel-collapse collapse">
+             <div class="panel-body"><?!= formatParagraph(data[i][colReview]) ?></div>
+           </div>
+         </div>
+      <? } ?>
+    
+    </div> 
+  </div>
+  </body>
+</html>

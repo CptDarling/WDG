@@ -1,0 +1,39 @@
+<script
+src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+</script>
+<script>
+// The code in this function runs when the page is loaded.
+$(function() {
+  google.script.run.withSuccessHandler(showThings)
+      .getLotsOfThings();
+});
+
+      <?
+        var data = getProductionData();
+        var colTitle = getColumnIndex('Title');
+        var colYear = getColumnIndex('Year');
+        var colDirector = getColumnIndex('Director');
+        var colWriter = getColumnIndex('Writer');
+        var rowTemplate = '<tr padding="15px"><td align="right"><strong>%s</strong></td><td>%s</td></tr>';
+      ?>
+      <? for (var i = 0; i < data.length; i++) { ?>
+      <? var idx = i + 1; ?>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?= idx ?>"><?= data[i][colTitle] ?> (<?= data[i][colYear] ?>)</a>
+          </h4>
+        </div>
+        <div id="collapse<?= idx ?>" class="panel-collapse collapse">
+          <div class="panel-body">
+              
+              <table>
+                <?!= getTR(rowTemplate, 'Director: ', data[i][colDirector]) ?>
+                <?!= getTR(rowTemplate, 'Writer: ', data[i][colWriter]) ?>
+              </table>
+              
+          </div>
+        </div>
+      </div>
+
+</script>
